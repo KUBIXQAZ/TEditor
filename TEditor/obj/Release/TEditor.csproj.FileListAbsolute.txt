@@ -1,0 +1,11 @@
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Release\TEditor.exe.config
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Release\TEditor.exe
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Release\TEditor.pdb
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.csproj.AssemblyReference.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.csproj.SuggestedBindingRedirects.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.Properties.Resources.resources
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.csproj.GenerateResource.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.csproj.CoreCompileInputs.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.exe
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.pdb
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.TEditor.resources

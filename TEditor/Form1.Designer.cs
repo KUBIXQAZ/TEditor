@@ -1,6 +1,6 @@
 ﻿namespace TEditor
 {
-    partial class Form1
+    partial class TEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TEditor));
             this.textbox = new System.Windows.Forms.RichTextBox();
             this.WindowBarPanel = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
@@ -191,7 +192,7 @@
             this.panel1.Size = new System.Drawing.Size(796, 446);
             this.panel1.TabIndex = 8;
             // 
-            // Form1
+            // TEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -200,9 +201,10 @@
             this.Controls.Add(this.WindowBarPanel);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(415, 200);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "TEditor";
+            this.Text = "TEditor";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.WindowBarPanel.ResumeLayout(false);

@@ -7,14 +7,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TEditor
 {
-    public partial class Form1 : Form
+    public partial class TEditor : Form
     {
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
         [DllImport("user32.dll")]
         public static extern int PostMessage(IntPtr hWnd, int Msg, int wParam, int LPAR);
 
-        public Form1()
+        public TEditor()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
@@ -292,7 +292,8 @@ namespace TEditor
             {
                 text = text.Replace("  ", " ");
             }
-            words = text.Split(' ').Length;
+            char[] chars = new char[] { '\n', ' '};
+            words = text.Split(chars).Length;
             if (text.Length == 0) words = 0;
 
             int lines = text.Split('\n').Length;
