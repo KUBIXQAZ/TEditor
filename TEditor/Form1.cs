@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TEditor
 {
@@ -20,6 +21,25 @@ namespace TEditor
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             WindowBarPanel.MouseDown += new MouseEventHandler(move_window);
             label1.MouseDown += new MouseEventHandler(move_window);
+
+            exitB.FlatAppearance.MouseOverBackColor = exitB.BackColor;
+            exitB.BackColorChanged += (s, e) =>
+            {
+                exitB.FlatAppearance.MouseOverBackColor = Color.Red;
+            };
+
+            minimizeB.FlatAppearance.MouseOverBackColor = minimizeB.BackColor;
+            minimizeB.BackColorChanged += (s, e) =>
+            {
+                minimizeB.FlatAppearance.MouseOverBackColor = Color.Gray;
+            };
+
+            fullscreenB.FlatAppearance.MouseOverBackColor = fullscreenB.BackColor;
+            fullscreenB.BackColorChanged += (s, e) =>
+            {
+                fullscreenB.FlatAppearance.MouseOverBackColor = Color.Gray;
+            };
+            SetPadding(textbox, new Padding(5, 5, 5, 5));
         }
         #region resizing_window
         protected override void OnPaint(PaintEventArgs e)
@@ -113,6 +133,40 @@ namespace TEditor
             return new Rectangle(this.ClientSize.Width - ImaginaryBorderSize, this.ClientSize.Height - ImaginaryBorderSize, ImaginaryBorderSize, ImaginaryBorderSize);
         }
         #endregion
+
+        #region padding
+        private const int EM_SETRECT = 0xB3;
+        [DllImport(@"User32.dll", EntryPoint = @"SendMessage", CharSet = CharSet.Auto)]
+        private static extern int SendMessageRefRect(IntPtr hWnd, uint msg, int wParam, ref RECT rect);
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public readonly int Left;
+            public readonly int Top;
+            public readonly int Right;
+            public readonly int Bottom;
+
+            private RECT(int left, int top, int right, int bottom)
+            {
+                Left = left;
+                Top = top;
+                Right = right;
+                Bottom = bottom;
+            }
+
+            public RECT(Rectangle r) : this(r.Left, r.Top, r.Right, r.Bottom)
+            {
+            }
+        }
+        public void SetPadding(System.Windows.Forms.RichTextBox textBox, Padding padding)
+        {
+            var rect = new Rectangle(padding.Left, padding.Top, textBox.ClientSize.Width - padding.Left - padding.Right, textBox.ClientSize.Height - padding.Top - padding.Bottom);
+            RECT rc = new RECT(rect);
+            SendMessageRefRect(textBox.Handle, EM_SETRECT, 0, ref rc);
+        }
+        #endregion
+
         private void move_window(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -124,23 +178,22 @@ namespace TEditor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            WindowBarPanel.BackColor = Color.Gray;
+            exitB.BackColor = Color.Transparent;
+            minimizeB.BackColor = Color.Transparent;
+            fullscreenB.BackColor = Color.Transparent;
 
-            exitB.BackColor = Color.Red;
-            minimizeB.BackColor = Color.Yellow;
-            fullscreenB.BackColor = Color.Blue;
-
-            BackColor = Color.FromArgb(24, 25, 26);
-            textbox.BackColor = Color.FromArgb(34, 37, 41);
+            BackColor = Color.FromArgb(15, 4, 61);
+            panel1.BackColor = Color.FromArgb(17, 17, 18);
+            textbox.BackColor = Color.FromArgb(24, 25, 26); 
             WindowBarPanel.BackColor = Color.FromArgb(13, 13, 13);
 
-            Color b_color = Color.FromArgb(27, 42, 56);
+            Color b_color = Color.FromArgb(19, 16, 31);
             button1.BackColor = b_color;
             button2.BackColor = b_color;
             button3.BackColor = b_color;
             button4.BackColor = b_color;
-            ForeColor = Color.FromArgb(214, 214, 214);
-            textbox.ForeColor = Color.FromArgb(214, 214, 214);
+            ForeColor = Color.FromArgb(209, 209, 209);
+            textbox.ForeColor = Color.FromArgb(209, 209, 209);
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -148,13 +201,16 @@ namespace TEditor
             int x = Size.Width;
             int y = Size.Height;
 
-            textbox.Width = x-10;
-            textbox.Height = y-40;
+            textbox.Width = x-20;
+            textbox.Height = y-70;
+            panel1.Width = x - 4; 
+            panel1.Height = y-4;
+            label1.Location = new Point(label1.Location.X, panel1.Height - 18);
 
-            WindowBarPanel.Width = x;
-            exitB.Location = new Point(x-25, exitB.Location.Y);
-            fullscreenB.Location = new Point(exitB.Location.X - 20, fullscreenB.Location.Y);
-            minimizeB.Location = new Point(fullscreenB.Location.X - 20, minimizeB.Location.Y);
+            WindowBarPanel.Width = x-4;
+            exitB.Location = new Point(x-30, exitB.Location.Y);
+            fullscreenB.Location = new Point(exitB.Location.X - 23, fullscreenB.Location.Y);
+            minimizeB.Location = new Point(fullscreenB.Location.X - 23, minimizeB.Location.Y);
         }
         private void exitB_Click(object sender, EventArgs e)
         {
@@ -239,7 +295,9 @@ namespace TEditor
             words = text.Split(' ').Length;
             if (text.Length == 0) words = 0;
 
-            label1.Text = "words: " + words + " letters: " + letters;
+            int lines = text.Split('\n').Length;
+
+            label1.Text = "WORDS: " + words + " LETTERS: " + letters + " LINES: " + lines;
         }
     }
 }

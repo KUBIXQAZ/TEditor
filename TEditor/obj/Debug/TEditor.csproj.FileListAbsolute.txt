@@ -9,3 +9,14 @@ D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\TEditor\obj\Debug\TEditor.cs
 D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\TEditor\obj\Debug\TEditor.csproj.CoreCompileInputs.cache
 D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\TEditor\obj\Debug\TEditor.exe
 D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\TEditor\obj\Debug\TEditor.pdb
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Debug\TEditor.exe.config
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Debug\TEditor.exe
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Debug\TEditor.pdb
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.csproj.AssemblyReference.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.csproj.SuggestedBindingRedirects.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.Form1.resources
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.Properties.Resources.resources
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.csproj.GenerateResource.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.csproj.CoreCompileInputs.cache
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.exe
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Debug\TEditor.pdb
