@@ -3,7 +3,6 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TEditor
 {
@@ -38,6 +37,18 @@ namespace TEditor
             fullscreenB.BackColorChanged += (s, e) =>
             {
                 fullscreenB.FlatAppearance.MouseOverBackColor = Color.Gray;
+            };
+
+            button6.FlatAppearance.MouseOverBackColor = button6.BackColor;
+            button6.BackColorChanged += (s, e) =>
+            {
+                button6.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            };
+
+            button7.FlatAppearance.MouseOverBackColor = button7.BackColor;
+            button7.BackColorChanged += (s, e) =>
+            {
+                button7.FlatAppearance.MouseOverBackColor = Color.Transparent;
             };
             SetPadding(textbox, new Padding(5, 5, 5, 5));
         }
@@ -192,8 +203,12 @@ namespace TEditor
             button2.BackColor = b_color;
             button3.BackColor = b_color;
             button4.BackColor = b_color;
+            button5.BackColor = b_color;
             ForeColor = Color.FromArgb(209, 209, 209);
             textbox.ForeColor = Color.FromArgb(209, 209, 209);
+
+            button7.BackColor = Color.Transparent;
+            button6.BackColor = Color.Transparent;
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -299,6 +314,57 @@ namespace TEditor
             int lines = text.Split('\n').Length;
 
             label1.Text = "WORDS: " + words + " LETTERS: " + letters + " LINES: " + lines;
+        }
+
+        bool onTop = false;
+        private void button5_Click(object sender, EventArgs e)
+        {
+            onTop = !onTop;
+            if (onTop == true)
+            {
+                TEditor.ActiveForm.TopMost = true;
+                this.TopMost = true;
+            }else
+            {
+                TEditor.ActiveForm.TopMost = false;
+                this.TopMost = false;
+            }
+        }
+
+        private void TEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string textbox_content = textbox.Text;
+            if(textbox_content != "")
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    if (File.Exists(Openedfilepath))
+                    {
+                        File.WriteAllText(Openedfilepath, textbox_content);
+                    }
+                    else
+                    {
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "Text Files|*.txt";
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            File.WriteAllText(Path.GetFullPath(saveFileDialog.FileName), textbox_content);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            textbox.Undo();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            textbox.Redo();
         }
     }
 }

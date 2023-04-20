@@ -73,6 +73,26 @@ namespace TEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_clockwise {
+            get {
+                object obj = ResourceManager.GetObject("arrow-clockwise", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_counterclockwise {
+            get {
+                object obj = ResourceManager.GetObject("arrow-counterclockwise", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dash_square {
             get {
                 object obj = ResourceManager.GetObject("dash-square", resourceCulture);
