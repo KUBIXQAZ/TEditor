@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 namespace TEditor
@@ -50,7 +51,7 @@ namespace TEditor
             {
                 button7.FlatAppearance.MouseOverBackColor = Color.Transparent;
             };
-            SetPadding(textbox, new Padding(5, 5, 5, 5));
+            //SetPadding(textbox, new Padding(5, 5, 5, 5));
         }
         #region resizing_window
         protected override void OnPaint(PaintEventArgs e)
@@ -195,7 +196,7 @@ namespace TEditor
 
             BackColor = Color.FromArgb(15, 4, 61);
             panel1.BackColor = Color.FromArgb(17, 17, 18);
-            textbox.BackColor = Color.FromArgb(24, 25, 26); 
+            textbox.BackColor = Color.FromArgb(24, 25, 26);
             WindowBarPanel.BackColor = Color.FromArgb(13, 13, 13);
 
             Color b_color = Color.FromArgb(19, 16, 31);
@@ -216,14 +217,14 @@ namespace TEditor
             int x = Size.Width;
             int y = Size.Height;
 
-            textbox.Width = x-20;
-            textbox.Height = y-70;
-            panel1.Width = x - 4; 
-            panel1.Height = y-4;
+            textbox.Width = x - 20;
+            textbox.Height = y - 70;
+            panel1.Width = x - 4;
+            panel1.Height = y - 4;
             label1.Location = new Point(label1.Location.X, panel1.Height - 18);
 
-            WindowBarPanel.Width = x-4;
-            exitB.Location = new Point(x-30, exitB.Location.Y);
+            WindowBarPanel.Width = x - 4;
+            exitB.Location = new Point(x - 30, exitB.Location.Y);
             fullscreenB.Location = new Point(exitB.Location.X - 23, fullscreenB.Location.Y);
             minimizeB.Location = new Point(fullscreenB.Location.X - 23, minimizeB.Location.Y);
         }
@@ -237,7 +238,7 @@ namespace TEditor
         }
         private void fullscreenB_Click(object sender, EventArgs e)
         {
-            if(WindowState == FormWindowState.Maximized) WindowState = FormWindowState.Normal;
+            if (WindowState == FormWindowState.Maximized) WindowState = FormWindowState.Normal;
             else WindowState = FormWindowState.Maximized;
         }
 
@@ -249,13 +250,10 @@ namespace TEditor
             {
                 var file = openFileDialog.OpenFile();
                 string fileName = openFileDialog.FileName;
-                if (Path.GetExtension(fileName) == ".txt")
-                {
-                    string file_content = File.ReadAllText(fileName);
-                    textbox.Text = file_content;
-                    Openedfilepath = Path.GetFullPath(fileName);
-                    file.Close();
-                }
+                string file_content = File.ReadAllText(fileName);
+                textbox.Text = file_content;
+                Openedfilepath = Path.GetFullPath(fileName);
+                file.Close();
             }
         }
 
@@ -265,7 +263,8 @@ namespace TEditor
             if (File.Exists(Openedfilepath))
             {
                 File.WriteAllText(Openedfilepath, textbox_content);
-            } else
+            }
+            else
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Text Files|*.txt";
@@ -307,7 +306,7 @@ namespace TEditor
             {
                 text = text.Replace("  ", " ");
             }
-            char[] chars = new char[] { '\n', ' '};
+            char[] chars = new char[] { '\n', ' ' };
             words = text.Split(chars).Length;
             if (text.Length == 0) words = 0;
 
@@ -324,7 +323,8 @@ namespace TEditor
             {
                 TEditor.ActiveForm.TopMost = true;
                 this.TopMost = true;
-            }else
+            }
+            else
             {
                 TEditor.ActiveForm.TopMost = false;
                 this.TopMost = false;
@@ -334,19 +334,30 @@ namespace TEditor
         private void TEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             string textbox_content = textbox.Text;
-            if(textbox_content != "")
+            textbox_content = textbox_content.Replace("\n", Environment.NewLine);
+
+            if (textbox_content != "")
             {
-                DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                if (File.Exists(Openedfilepath))
                 {
-                    if (File.Exists(Openedfilepath))
+                    string file_content = File.ReadAllText(Openedfilepath);
+                    if (textbox_content != file_content)
                     {
-                        File.WriteAllText(Openedfilepath, textbox_content);
+                        DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            File.WriteAllText(Openedfilepath, textbox_content);
+                        }
                     }
-                    else
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
                     {
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.Filter = "Text Files|*.txt";
+                        string ext = Path.GetExtension(Openedfilepath);
+                        saveFileDialog.Filter = "Text Files|" + ext;
 
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
@@ -364,7 +375,7 @@ namespace TEditor
 
         private void button6_Click(object sender, EventArgs e)
         {
-            textbox.Redo();
+            //textbox.Redo();
         }
     }
 }

@@ -29,34 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TEditor));
-            this.textbox = new System.Windows.Forms.RichTextBox();
             this.WindowBarPanel = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.fullscreenB = new System.Windows.Forms.Button();
             this.minimizeB = new System.Windows.Forms.Button();
             this.exitB = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textbox = new System.Windows.Forms.RichTextBox();
             this.WindowBarPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textbox
-            // 
-            this.textbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textbox.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.textbox.Location = new System.Drawing.Point(10, 45);
-            this.textbox.Name = "textbox";
-            this.textbox.Size = new System.Drawing.Size(776, 380);
-            this.textbox.TabIndex = 0;
-            this.textbox.Text = "";
-            this.textbox.TextChanged += new System.EventHandler(this.textbox_TextChanged);
             // 
             // WindowBarPanel
             // 
@@ -75,6 +64,50 @@
             this.WindowBarPanel.Name = "WindowBarPanel";
             this.WindowBarPanel.Size = new System.Drawing.Size(796, 35);
             this.WindowBarPanel.TabIndex = 1;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button6.BackgroundImage = global::TEditor.Properties.Resources.arrow_clockwise;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.button6.Location = new System.Drawing.Point(433, 7);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(22, 22);
+            this.button6.TabIndex = 9;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button7.BackgroundImage = global::TEditor.Properties.Resources.arrow_counterclockwise;
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.button7.Location = new System.Drawing.Point(405, 7);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(22, 22);
+            this.button7.TabIndex = 8;
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.button5.Location = new System.Drawing.Point(326, 7);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(73, 22);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "ON TOP";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -133,69 +166,6 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(6, 428);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "WORDS: 0 LETTERS: 0 LINES: 0";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(2, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(796, 446);
-            this.panel1.TabIndex = 8;
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.button5.Location = new System.Drawing.Point(326, 7);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(73, 22);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "ON TOP";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button6.BackgroundImage = global::TEditor.Properties.Resources.arrow_clockwise;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.button6.Location = new System.Drawing.Point(433, 7);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(22, 22);
-            this.button6.TabIndex = 9;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button7.BackgroundImage = global::TEditor.Properties.Resources.arrow_counterclockwise;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.button7.Location = new System.Drawing.Point(405, 7);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(22, 22);
-            this.button7.TabIndex = 8;
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // fullscreenB
             // 
             this.fullscreenB.BackColor = System.Drawing.Color.Turquoise;
@@ -242,6 +212,36 @@
             this.exitB.UseVisualStyleBackColor = false;
             this.exitB.Click += new System.EventHandler(this.exitB_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(6, 428);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(171, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "WORDS: 0 LETTERS: 0 LINES: 0";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(796, 446);
+            this.panel1.TabIndex = 8;
+            // 
+            // textbox
+            // 
+            this.textbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textbox.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.textbox.Location = new System.Drawing.Point(10, 45);
+            this.textbox.Name = "textbox";
+            this.textbox.Size = new System.Drawing.Size(776, 380);
+            this.textbox.TabIndex = 0;
+            this.textbox.Text = "";
+            this.textbox.TextChanged += new System.EventHandler(this.textbox_TextChanged);
+            // 
             // TEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,8 +266,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox textbox;
         private System.Windows.Forms.Panel WindowBarPanel;
         private System.Windows.Forms.Button exitB;
         private System.Windows.Forms.Button minimizeB;
@@ -281,6 +279,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.RichTextBox textbox;
     }
 }
 
