@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -12,6 +13,14 @@ namespace TEditor
         public static extern bool ReleaseCapture();
         [DllImport("user32.dll")]
         public static extern int PostMessage(IntPtr hWnd, int Msg, int wParam, int LPAR);
+
+        public class Settings 
+        {
+            public int x { get; set; }
+            public int y { get; set; }
+            public int width { get; set; }  
+            public int height { get; set; }
+        }
 
         public TEditor()
         {
@@ -190,8 +199,16 @@ namespace TEditor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string myAppFolder = Path.Combine(appDataPath, "TEditor");
+            string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
+            string settingsJson = File.ReadAllText(settingsFilePath);
+            Settings settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
+            SetDesktopLocation(settings.x, settings.y);
+            Size = new Size(settings.width, settings.height);
+
             string[] args = Environment.GetCommandLineArgs();
-            if (args.Length > 0)
+            if (args.Length > 1)
             {
                 string filePath = args[1];
                 string file_content = File.ReadAllText(filePath);
@@ -342,6 +359,24 @@ namespace TEditor
 
         private void TEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Settings settings = new Settings();
+            settings.x = Location.X;
+            settings.y = Location.Y;
+            settings.width = Width;
+            settings.height = Height;
+
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string myAppFolder = Path.Combine(appDataPath, "TEditor");
+            string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
+
+            if (!Directory.Exists(myAppFolder))
+            {
+                Directory.CreateDirectory(myAppFolder);
+            }
+
+            string settingsJson = JsonConvert.SerializeObject(settings);
+            File.WriteAllText(settingsFilePath, settingsJson);
+
             string textbox_content = textbox.Text;
             textbox_content = textbox_content.Replace("\n", Environment.NewLine);
 
