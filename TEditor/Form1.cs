@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
 namespace TEditor
@@ -51,7 +50,7 @@ namespace TEditor
             {
                 button7.FlatAppearance.MouseOverBackColor = Color.Transparent;
             };
-            //SetPadding(textbox, new Padding(5, 5, 5, 5));
+            SetPadding(textbox, new Padding(5, 5, 5, 5));
         }
         #region resizing_window
         protected override void OnPaint(PaintEventArgs e)
@@ -146,6 +145,7 @@ namespace TEditor
         }
         #endregion
 
+
         #region padding
         private const int EM_SETRECT = 0xB3;
         [DllImport(@"User32.dll", EntryPoint = @"SendMessage", CharSet = CharSet.Auto)]
@@ -171,7 +171,7 @@ namespace TEditor
             {
             }
         }
-        public void SetPadding(System.Windows.Forms.RichTextBox textBox, Padding padding)
+        public void SetPadding(RichTextBox textBox, Padding padding)
         {
             var rect = new Rectangle(padding.Left, padding.Top, textBox.ClientSize.Width - padding.Left - padding.Right, textBox.ClientSize.Height - padding.Top - padding.Bottom);
             RECT rc = new RECT(rect);
@@ -190,6 +190,15 @@ namespace TEditor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 0)
+            {
+                string filePath = args[1];
+                string file_content = File.ReadAllText(filePath);
+                textbox.Text = file_content;
+                Openedfilepath = Path.GetFullPath(filePath);
+            }
+
             exitB.BackColor = Color.Transparent;
             minimizeB.BackColor = Color.Transparent;
             fullscreenB.BackColor = Color.Transparent;
@@ -375,7 +384,7 @@ namespace TEditor
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //textbox.Redo();
+            textbox.Redo();
         }
     }
 }
