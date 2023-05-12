@@ -9,3 +9,6 @@ D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.csproj.C
 D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.exe
 D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.pdb
 D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.TEditor.resources
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Release\Newtonsoft.Json.dll
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\bin\Release\Newtonsoft.Json.xml
+D:\PROGRAMMING-PROJECTS\csharp-apps\TEditor\TEditor\obj\Release\TEditor.csproj.CopyComplete

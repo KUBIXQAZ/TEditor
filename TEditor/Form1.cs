@@ -14,6 +14,7 @@ namespace TEditor
         [DllImport("user32.dll")]
         public static extern int PostMessage(IntPtr hWnd, int Msg, int wParam, int LPAR);
 
+        string Openedfilepath;
         public class Settings 
         {
             public int x { get; set; }
@@ -61,6 +62,7 @@ namespace TEditor
             };
             SetPadding(textbox, new Padding(5, 5, 5, 5));
         }
+        
         #region resizing_window
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -105,12 +107,6 @@ namespace TEditor
             }
         }
 
-        private Random rng = new Random();
-        public Color randomColour()
-        {
-            return Color.FromArgb(255, rng.Next(255), rng.Next(255), rng.Next(255));
-        }
-
         const int ImaginaryBorderSize = 2;
 
         public new Rectangle Top()
@@ -153,7 +149,6 @@ namespace TEditor
             return new Rectangle(this.ClientSize.Width - ImaginaryBorderSize, this.ClientSize.Height - ImaginaryBorderSize, ImaginaryBorderSize, ImaginaryBorderSize);
         }
         #endregion
-
 
         #region padding
         private const int EM_SETRECT = 0xB3;
@@ -268,18 +263,15 @@ namespace TEditor
             else WindowState = FormWindowState.Maximized;
         }
 
-        string Openedfilepath;
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var file = openFileDialog.OpenFile();
-                string fileName = openFileDialog.FileName;
-                string file_content = File.ReadAllText(fileName);
+                string filePath = Path.GetFullPath(openFileDialog.FileName);
+                string file_content = File.ReadAllText(filePath);
                 textbox.Text = file_content;
-                Openedfilepath = Path.GetFullPath(fileName);
-                file.Close();
+                Openedfilepath = Path.GetFullPath(filePath);
             }
         }
 
