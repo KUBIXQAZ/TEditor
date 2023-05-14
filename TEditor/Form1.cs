@@ -290,6 +290,7 @@ namespace TEditor
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     File.WriteAllText(Path.GetFullPath(saveFileDialog.FileName), textbox_content);
+                    Openedfilepath = Path.GetFullPath(saveFileDialog.FileName);
                 }
             }
         }
@@ -303,6 +304,7 @@ namespace TEditor
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(Path.GetFullPath(saveFileDialog.FileName), textbox_content);
+                Openedfilepath = Path.GetFullPath(saveFileDialog.FileName);
             }
         }
 
