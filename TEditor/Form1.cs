@@ -14,7 +14,9 @@ namespace TEditor
         [DllImport("user32.dll")]
         public static extern int PostMessage(IntPtr hWnd, int Msg, int wParam, int LPAR);
 
+        Color b_color = Color.FromArgb(19, 16, 31);
         string Openedfilepath;
+        public Font font = new Font("Arial", 10, FontStyle.Regular);
         public class Settings 
         {
             public int x { get; set; }
@@ -199,6 +201,9 @@ namespace TEditor
             string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
             string settingsJson = File.ReadAllText(settingsFilePath);
             Settings settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
+
+            textbox.Font = font;
+
             SetDesktopLocation(settings.x, settings.y);
             Size = new Size(settings.width, settings.height);
 
@@ -220,12 +225,14 @@ namespace TEditor
             textbox.BackColor = Color.FromArgb(24, 25, 26);
             WindowBarPanel.BackColor = Color.FromArgb(13, 13, 13);
 
-            Color b_color = Color.FromArgb(19, 16, 31);
             button1.BackColor = b_color;
             button2.BackColor = b_color;
             button3.BackColor = b_color;
             button4.BackColor = b_color;
             button5.BackColor = b_color;
+            button8.BackColor = b_color;
+            button9.BackColor = b_color;
+            button10.BackColor = b_color;
             ForeColor = Color.FromArgb(209, 209, 209);
             textbox.ForeColor = Color.FromArgb(209, 209, 209);
 
@@ -414,6 +421,39 @@ namespace TEditor
         private void button6_Click(object sender, EventArgs e)
         {
             textbox.Redo();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if(colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                button8.ForeColor = colorDialog.Color;
+                textbox.SelectionColor = colorDialog.Color;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.CustomColors = new int[] { Color.FromArgb(24, 25, 26).ToArgb() };
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                button9.BackColor = colorDialog.Color;
+                textbox.SelectionBackColor = colorDialog.Color;
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        { 
+            FontDialog fontdialog = new FontDialog();
+            fontdialog.Font = font;
+            if(fontdialog.ShowDialog() == DialogResult.OK)
+            {
+                button10.Text = fontdialog.Font.FontFamily.Name + ", " + fontdialog.Font.Size + ", " + fontdialog.Font.Style;
+                textbox.SelectionFont = fontdialog.Font;
+                font = fontdialog.Font;
+            }
         }
     }
 }

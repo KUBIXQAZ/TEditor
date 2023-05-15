@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TEditor));
             this.WindowBarPanel = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -50,6 +53,9 @@
             // WindowBarPanel
             // 
             this.WindowBarPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.WindowBarPanel.Controls.Add(this.button10);
+            this.WindowBarPanel.Controls.Add(this.button9);
+            this.WindowBarPanel.Controls.Add(this.button8);
             this.WindowBarPanel.Controls.Add(this.button6);
             this.WindowBarPanel.Controls.Add(this.button7);
             this.WindowBarPanel.Controls.Add(this.button5);
@@ -64,6 +70,49 @@
             this.WindowBarPanel.Name = "WindowBarPanel";
             this.WindowBarPanel.Size = new System.Drawing.Size(796, 35);
             this.WindowBarPanel.TabIndex = 1;
+            // 
+            // button10
+            // 
+            this.button10.AutoSize = true;
+            this.button10.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.button10.Location = new System.Drawing.Point(517, 7);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(202, 24);
+            this.button10.TabIndex = 12;
+            this.button10.Text = "Arial, 10, Regular";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.button9.Location = new System.Drawing.Point(489, 7);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(22, 22);
+            this.button9.TabIndex = 11;
+            this.button9.Text = "A";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.button8.Location = new System.Drawing.Point(461, 7);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(22, 22);
+            this.button8.TabIndex = 10;
+            this.button8.Text = "A";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button6
             // 
@@ -246,19 +295,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(850, 450);
             this.Controls.Add(this.textbox);
             this.Controls.Add(this.WindowBarPanel);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(553, 250);
+            this.MinimumSize = new System.Drawing.Size(850, 250);
             this.Name = "TEditor";
             this.Text = "TEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TEditor_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.WindowBarPanel.ResumeLayout(false);
+            this.WindowBarPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -280,6 +330,9 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.RichTextBox textbox;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
     }
 }
 
