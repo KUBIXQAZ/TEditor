@@ -196,16 +196,24 @@ namespace TEditor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string myAppFolder = Path.Combine(appDataPath, "TEditor");
-            string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
-            string settingsJson = File.ReadAllText(settingsFilePath);
-            Settings settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
+            try
+            {
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string myAppFolder = Path.Combine(appDataPath, "TEditor");
+                string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
+                string settingsJson = File.ReadAllText(settingsFilePath);
 
-            textbox.Font = font;
+                if (File.Exists(settingsFilePath))
+                {
+                    Settings settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
 
-            SetDesktopLocation(settings.x, settings.y);
-            Size = new Size(settings.width, settings.height);
+                    textbox.Font = font;
+
+                    SetDesktopLocation(settings.x, settings.y);
+                    Size = new Size(settings.width, settings.height);
+                }
+            }
+            catch { }
 
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
