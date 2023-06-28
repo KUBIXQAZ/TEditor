@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -387,13 +388,14 @@ namespace TEditor
             File.WriteAllText(settingsFilePath, settingsJson);
 
             string textbox_content = textbox.Text;
-            textbox_content = textbox_content.Replace("\n", Environment.NewLine);
+            textbox_content = textbox_content.Replace(@"\r\n?|\n", Environment.NewLine);
 
             if (textbox_content != "")
             {
                 if (File.Exists(Openedfilepath))
                 {
                     string file_content = File.ReadAllText(Openedfilepath);
+                    file_content = file_content.Replace(@"\r\n?|\n", Environment.NewLine);
                     if (textbox_content != file_content)
                     {
                         DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
