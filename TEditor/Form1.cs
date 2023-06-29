@@ -367,6 +367,15 @@ namespace TEditor
             }
         }
 
+        public static bool InTextBox(string oldString, string newString)
+        {
+            string oldText = oldString.Replace("\r\n", "\n");
+            string newText = newString.Replace("\r\n", "\n");
+
+            if (oldText == newText) return true;
+            else return false;
+        }
+
         private void TEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings settings = new Settings();
@@ -388,39 +397,37 @@ namespace TEditor
             File.WriteAllText(settingsFilePath, settingsJson);
 
             string textbox_content = textbox.Text;
-            textbox_content = textbox_content.Replace(@"\r\n?|\n", Environment.NewLine);
 
-            if (textbox_content != "")
+            if (File.Exists(Openedfilepath))
             {
-                if (File.Exists(Openedfilepath))
+                string file_content = File.ReadAllText(Openedfilepath);
+
+                if (InTextBox(file_content, textbox_content) == false)
                 {
-                    string file_content = File.ReadAllText(Openedfilepath);
-                    file_content = file_content.Replace(@"\r\n?|\n", Environment.NewLine);
-                    if (textbox_content != file_content)
-                    {
-                        DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            File.WriteAllText(Openedfilepath, textbox_content);
-                        }
-                    }
-                }
-                else
-                {
+
                     DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        string ext = Path.GetExtension(Openedfilepath);
-                        saveFileDialog.Filter = "Text Files|" + ext;
-
-                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            File.WriteAllText(Path.GetFullPath(saveFileDialog.FileName), textbox_content);
-                        }
+                        File.WriteAllText(Openedfilepath, textbox_content);
                     }
                 }
             }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you want to save your note?", "TEditor", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    string ext = Path.GetExtension(Openedfilepath);
+                    saveFileDialog.Filter = "Text Files|" + ext;
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllText(Path.GetFullPath(saveFileDialog.FileName), textbox_content);
+                    }
+                }
+            }
+
         }
 
         private void button7_Click(object sender, EventArgs e)
