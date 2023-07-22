@@ -17,14 +17,19 @@ namespace TEditor
 
         Color b_color = Color.FromArgb(19, 16, 31);
         string Openedfilepath;
-        public Font font = new Font("Arial", 10, FontStyle.Regular);
-        public class Settings 
+
+        public class Settings
         {
+            public string FontFamily { get; set; } = "Arial";
+            public float Size { get; set; } = 12.0f;
+            public FontStyle Style { get; set; } = FontStyle.Regular;
             public int x { get; set; }
             public int y { get; set; }
             public int width { get; set; }  
             public int height { get; set; }
         }
+
+        Settings settings;
 
         public TEditor()
         {
@@ -64,6 +69,8 @@ namespace TEditor
                 button7.FlatAppearance.MouseOverBackColor = Color.Transparent;
             };
             SetPadding(textbox, new Padding(5, 5, 5, 5));
+
+            settings = new Settings();
         }
         
         #region resizing_window
@@ -206,9 +213,13 @@ namespace TEditor
 
                 if (File.Exists(settingsFilePath))
                 {
-                    Settings settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
+                    settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
+                    settings = JsonConvert.DeserializeObject<Settings>(settingsJson);
 
-                    textbox.Font = font;
+                    Font loadedFont = new Font(settings.FontFamily, settings.Size, settings.Style);
+
+                    textbox.Font = loadedFont;
+                    button10.Text = settings.FontFamily + ", " + settings.Size + ", " + settings.Style;
 
                     SetDesktopLocation(settings.x, settings.y);
                     Size = new Size(settings.width, settings.height);
@@ -239,8 +250,6 @@ namespace TEditor
             button3.BackColor = b_color;
             button4.BackColor = b_color;
             button5.BackColor = b_color;
-            button8.BackColor = b_color;
-            button9.BackColor = b_color;
             button10.BackColor = b_color;
             ForeColor = Color.FromArgb(209, 209, 209);
             textbox.ForeColor = Color.FromArgb(209, 209, 209);
@@ -404,11 +413,14 @@ namespace TEditor
 
         private void TEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings settings = new Settings();
             settings.x = Location.X;
             settings.y = Location.Y;
             settings.width = Width;
             settings.height = Height;
+
+            settings.FontFamily = textbox.Font.FontFamily.Name.ToString();
+            settings.Size = textbox.Font.Size;
+            settings.Style = textbox.Font.Style;
 
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string myAppFolder = Path.Combine(appDataPath, "TEditor");
@@ -470,36 +482,22 @@ namespace TEditor
             textbox.Redo();
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDialog = new ColorDialog();
-            if(colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                button8.ForeColor = colorDialog.Color;
-                textbox.SelectionColor = colorDialog.Color;
-            }
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            ColorDialog colorDialog = new ColorDialog();
-            colorDialog.CustomColors = new int[] { Color.FromArgb(24, 25, 26).ToArgb() };
-            if (colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                button9.BackColor = colorDialog.Color;
-                textbox.SelectionBackColor = colorDialog.Color;
-            }
-        }
-
         private void button10_Click(object sender, EventArgs e)
-        { 
+        {
             FontDialog fontdialog = new FontDialog();
-            fontdialog.Font = font;
-            if(fontdialog.ShowDialog() == DialogResult.OK)
+
+            Font loadedFont = new Font(settings.FontFamily, settings.Size, settings.Style);
+            Debug.WriteLine(loadedFont);
+            fontdialog.Font = loadedFont; 
+
+            if (fontdialog.ShowDialog() == DialogResult.OK)
             {
                 button10.Text = fontdialog.Font.FontFamily.Name + ", " + fontdialog.Font.Size + ", " + fontdialog.Font.Style;
-                textbox.SelectionFont = fontdialog.Font;
-                font = fontdialog.Font;
+                textbox.Font = fontdialog.Font;
+
+                settings.FontFamily = fontdialog.Font.FontFamily.Name.ToString();
+                settings.Size = fontdialog.Font.Size;
+                settings.Style = fontdialog.Font.Style;
             }
         }
     }
