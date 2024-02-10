@@ -18,6 +18,10 @@ namespace TEditor
         Color b_color = Color.FromArgb(19, 16, 31);
         string Openedfilepath;
 
+        public static string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static string myAppFolder = Path.Combine(appDataPath, "KUBIXQAZ/TEditor");
+        public static string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
+
         public class Settings
         {
             public string FontFamily { get; set; } = "Arial";
@@ -206,9 +210,7 @@ namespace TEditor
         {
             try
             {
-                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                string myAppFolder = Path.Combine(appDataPath, "TEditor");
-                string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
+
                 string settingsJson = File.ReadAllText(settingsFilePath);
 
                 if (File.Exists(settingsFilePath))
@@ -421,10 +423,6 @@ namespace TEditor
             settings.FontFamily = textbox.Font.FontFamily.Name.ToString();
             settings.Size = textbox.Font.Size;
             settings.Style = textbox.Font.Style;
-
-            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string myAppFolder = Path.Combine(appDataPath, "TEditor");
-            string settingsFilePath = Path.Combine(myAppFolder, "settings.json");
 
             if (!Directory.Exists(myAppFolder))
             {
